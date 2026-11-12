@@ -9,6 +9,7 @@ use BasicApp\Settings\Interfaces\SettingsInterface;
 use BasicApp\Form\Interfaces\FormInterface;
 use BasicApp\Settings\Traits\Settings;
 use BasicApp\Form\Traits\Form;
+use CodeIgniter\Entity\Entity;
 
 abstract class SettingsEntity extends Entity implements SettingsInterface, FormInterface
 {
