@@ -5,11 +5,20 @@
  */
 namespace BasicApp\Settings\Traits;
 
+use ReflectionClass;
+
 trait Settings
 {
+    public function getSettingsName(): string
+    {
+        static $settingsClass = (new ReflectionClass($this))->getShortName();
+
+        return $settingsClass;
+    }
+
     public function getSettings(?array $attributeNames = null) : array
     {
-        $settingsClass = get_class($this);
+        $settingsClass = $this->getSettingsName();
 
         if ($attributeNames === null)
         {    
@@ -40,7 +49,7 @@ trait Settings
 
     public function setSettings(?array $values = null)
     {
-        $settingsClass = get_class($this);
+        $settingsClass = $this->getSettingsName();
 
         if ($values === null)
         {

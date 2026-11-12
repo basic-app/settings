@@ -11,5 +11,7 @@ interface SettingsInterface
 
     public function setSettings(?array $values = null);
 
+    public function getSettingsName(): string;
+
     public function getPublicProperties(): array;
 }
