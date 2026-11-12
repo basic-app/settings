@@ -1,0 +1,12 @@
+{
+    "name": "basic-app/settings",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "BasicApp\\Settings\\": "src"
+        }
+    },
+    "require": {
+        "codeigniter4/settings": "*"
+    }
+}
