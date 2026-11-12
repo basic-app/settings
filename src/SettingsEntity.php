@@ -15,19 +15,33 @@ abstract class SettingsEntity extends Entity implements SettingsInterface, FormI
 {
     use Settings, Form;
 
+    static bool $override = true;
+
     public function __construct(?array $data = null)
     {
         parent::__construct($data);
 
-        $this->fill($this->getSettings(null, array_keys($this->attributes)));
+        if (static::$override)
+        {
+            static::$override = false;
 
-        $this->syncOriginal();
+            $this->fill($this->getSettings(array_keys($this->attributes)));
+
+            static::$override = true;
+
+            $this->syncOriginal();
+        }
     }
 
     public function save(&$errors = null) : bool
     {
-        $this->setSettings(null, $this->attributes);
+        $this->setSettings($this->attributes);
 
         return true;
+    }
+
+    public function getPublicProperties(): array
+    {
+        return $this->attributes;
     }
 } 

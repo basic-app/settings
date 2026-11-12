@@ -15,9 +15,18 @@ abstract class Settings implements SettingsInterface, FormInterface
 {
     use SettingsTrait, Form, PropertiesTrait;
 
+    static bool $override = true;
+
     public function __construct()
     {
-        $this->fill($this->getSettings());
+        if (static::$override)
+        {
+            static::$override = false;
+
+            $this->fill($this->getSettings());
+
+            static::$override = true;
+        }
     }
 
     public function save(&$errors = null) : bool

@@ -15,11 +15,18 @@ abstract class SettingsCell extends Cell implements SettingsInterface, FormInter
 {
     use Settings, Form;
 
+    static bool $override = true;
+
     public function __construct()
     {
-        $values = $this->getSettings();
+        if (static::$override)
+        {
+            static::$override = false;
 
-        $this->fill($values);
+            $this->fill($this->getSettings());
+
+            static::$override = true;
+        }
     }
 
     public function save(&$errors = null) : bool
