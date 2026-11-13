@@ -11,9 +11,7 @@ trait Settings
 {
     public function getSettingsName(): string
     {
-        static $settingsClass = (new ReflectionClass($this))->getShortName();
-
-        return $settingsClass;
+        return (new ReflectionClass($this))->getShortName();
     }
 
     public function getSettings(?array $attributeNames = null) : array
