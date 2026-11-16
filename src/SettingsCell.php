@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 /**
  * @author Basic App Dev Team
  * @license MIT
  */
+
 namespace BasicApp\Settings;
 
 use CodeIgniter\View\Cells\Cell;
@@ -14,14 +16,14 @@ use BasicApp\Form\Interfaces\FormInterface;
 
 abstract class SettingsCell extends Cell implements SettingsInterface, FormInterface
 {
-    use Settings, Form;
+    use Settings;
+    use Form;
 
-    static bool $override = true;
+    public static bool $override = true;
 
     public function __construct()
     {
-        if (static::$override)
-        {
+        if (static::$override) {
             static::$override = false;
 
             $this->fill($this->getSettings());
@@ -30,7 +32,7 @@ abstract class SettingsCell extends Cell implements SettingsInterface, FormInter
         }
     }
 
-    public function save(&$errors = null) : bool
+    public function save(&$errors = null): bool
     {
         $this->setSettings();
 

@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 /**
  * @author Basic App Dev Team
  * @license MIT
  */
+
 namespace BasicApp\Settings;
 
 use BasicApp\Settings\Interfaces\SettingsInterface;
@@ -14,16 +16,16 @@ use CodeIgniter\Entity\Entity;
 
 abstract class SettingsEntity extends Entity implements SettingsInterface, FormInterface
 {
-    use Settings, Form;
+    use Settings;
+    use Form;
 
-    static bool $override = true;
+    public static bool $override = true;
 
     public function __construct(?array $data = null)
     {
         parent::__construct($data);
 
-        if (static::$override)
-        {
+        if (static::$override) {
             static::$override = false;
 
             $settings = $this->getSettings(array_keys($this->attributes));
@@ -36,7 +38,7 @@ abstract class SettingsEntity extends Entity implements SettingsInterface, FormI
         }
     }
 
-    public function save(&$errors = null) : bool
+    public function save(&$errors = null): bool
     {
         $this->setSettings($this->attributes);
 
@@ -47,4 +49,4 @@ abstract class SettingsEntity extends Entity implements SettingsInterface, FormI
     {
         return $this->attributes;
     }
-} 
+}

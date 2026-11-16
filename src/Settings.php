@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 /**
  * @author Basic App Dev Team
  * @license MIT
  */
+
 namespace BasicApp\Settings;
 
 use BasicApp\Settings\Interfaces\SettingsInterface;
@@ -14,14 +16,15 @@ use CodeIgniter\Traits\PropertiesTrait;
 
 abstract class Settings implements SettingsInterface, FormInterface
 {
-    use SettingsTrait, Form, PropertiesTrait;
+    use SettingsTrait;
+    use Form;
+    use PropertiesTrait;
 
-    static bool $override = true;
+    public static bool $override = true;
 
     public function __construct()
     {
-        if (static::$override)
-        {
+        if (static::$override) {
             static::$override = false;
 
             $this->fill($this->getSettings());
@@ -30,7 +33,7 @@ abstract class Settings implements SettingsInterface, FormInterface
         }
     }
 
-    public function save(&$errors = null) : bool
+    public function save(&$errors = null): bool
     {
         $this->setSettings();
 
